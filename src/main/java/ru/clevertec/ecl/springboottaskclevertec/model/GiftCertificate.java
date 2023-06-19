@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
+@DynamicUpdate
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +31,11 @@ public class GiftCertificate {
     @Column(nullable = false)
     private Date lastUpdateDate;
 
-    @OneToMany(mappedBy = "tag")
-    private List<Tag> tags;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "cert_tag",
+            joinColumns = @JoinColumn(name = "gift_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags;
 }

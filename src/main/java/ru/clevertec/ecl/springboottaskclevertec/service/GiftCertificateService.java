@@ -1,11 +1,12 @@
-package ru.clevertec.ecl.springboottaskclevertec.repository;
+package ru.clevertec.ecl.springboottaskclevertec.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import ru.clevertec.ecl.springboottaskclevertec.model.GiftCertificate;
 
 import java.util.Set;
 
-public interface GiftCertificateRepository extends JpaRepository<GiftCertificate, Long> {
+public interface GiftCertificateService {
+    GiftCertificate save(GiftCertificate giftCertificate);
+
     Set<GiftCertificate> findByNameContains(String name);
 
     Set<GiftCertificate> findByNameContainsOrderByNameAsc(String name);
