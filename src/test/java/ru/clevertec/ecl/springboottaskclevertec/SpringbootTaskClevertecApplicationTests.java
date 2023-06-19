@@ -1,4 +1,4 @@
-package by.clevertec.ghoncharko.springboottaskclevertec;
+package ru.clevertec.ecl.springboottaskclevertec;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
