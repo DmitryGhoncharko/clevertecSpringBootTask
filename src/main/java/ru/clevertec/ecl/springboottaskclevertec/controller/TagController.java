@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.ecl.springboottaskclevertec.model.Tag;
 import ru.clevertec.ecl.springboottaskclevertec.service.TagService;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/tag")
@@ -28,7 +28,7 @@ public class TagController {
         return tagOptional.map(tag -> new ResponseEntity<>(tag, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @GetMapping(value = "/findByNameContains/{name}")
-    public ResponseEntity<Set<Tag>> findByNameContains(@PathVariable(value = "name") String name){
+    public ResponseEntity<List<Tag>> findByNameContains(@PathVariable(value = "name") String name){
         return new ResponseEntity<>(tagService.findByNameContains(name),HttpStatus.OK);
     }
 }

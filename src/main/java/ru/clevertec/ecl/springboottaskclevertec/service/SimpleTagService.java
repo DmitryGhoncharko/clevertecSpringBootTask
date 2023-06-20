@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.springboottaskclevertec.model.Tag;
 import ru.clevertec.ecl.springboottaskclevertec.repository.TagRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class SimpleTagService implements TagService{
@@ -22,7 +22,7 @@ public class SimpleTagService implements TagService{
     }
 
     @Override
-    public Set<Tag> findByNameContains(String name) {
+    public List<Tag> findByNameContains(String name) {
         return tagRepository.findByNameContains(name);
     }
 }

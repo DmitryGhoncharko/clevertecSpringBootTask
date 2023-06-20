@@ -8,10 +8,8 @@ import ru.clevertec.ecl.springboottaskclevertec.model.Tag;
 import ru.clevertec.ecl.springboottaskclevertec.repository.GiftCertificateRepository;
 import ru.clevertec.ecl.springboottaskclevertec.repository.TagRepository;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 @Service
 public class SimpleGiftCertificateService implements GiftCertificateService {
     private final GiftCertificateRepository giftCertificateRepository;
@@ -25,7 +23,7 @@ public class SimpleGiftCertificateService implements GiftCertificateService {
     @Override
     @Transactional
     public GiftCertificate save(GiftCertificate giftCertificate) {
-        Set<Tag> tagSet = giftCertificate.getTags();
+        List<Tag> tagSet = giftCertificate.getTags();
         for(Tag tag : tagSet){
             Optional<Tag> tagOptional = tagRepository.findByName(tag.getName());
             if(tagOptional.isPresent()){
@@ -38,32 +36,33 @@ public class SimpleGiftCertificateService implements GiftCertificateService {
     }
 
     @Override
-    public Set<GiftCertificate> findByNameContains(String name) {
+    @Transactional
+    public List<GiftCertificate> findByNameContains(String name) {
         return giftCertificateRepository.findByNameContains(name);
     }
 
     @Override
-    public Set<GiftCertificate> findByNameContainsOrderByNameAsc(String name) {
+    public List<GiftCertificate> findByNameContainsOrderByNameAsc(String name) {
         return giftCertificateRepository.findByNameContainsOrderByNameAsc(name);
     }
 
     @Override
-    public Set<GiftCertificate> findByNameContainsOrderByNameDesc(String name) {
+    public List<GiftCertificate> findByNameContainsOrderByNameDesc(String name) {
         return giftCertificateRepository.findByNameContainsOrderByNameDesc(name);
     }
 
     @Override
-    public Set<GiftCertificate> findByDescriptionContains(String name) {
+    public List<GiftCertificate> findByDescriptionContains(String name) {
         return giftCertificateRepository.findByDescriptionContains(name);
     }
 
     @Override
-    public Set<GiftCertificate> findByDescriptionContainsOrderByCreateDateAsc(String name) {
+    public List<GiftCertificate> findByDescriptionContainsOrderByCreateDateAsc(String name) {
         return giftCertificateRepository.findByDescriptionContainsOrderByCreateDateAsc(name);
     }
 
     @Override
-    public Set<GiftCertificate> findByDescriptionContainsOrderByCreateDateDesc(String name) {
+    public List<GiftCertificate> findByDescriptionContainsOrderByCreateDateDesc(String name) {
         return giftCertificateRepository.findByDescriptionContainsOrderByCreateDateDesc(name);
     }
 }

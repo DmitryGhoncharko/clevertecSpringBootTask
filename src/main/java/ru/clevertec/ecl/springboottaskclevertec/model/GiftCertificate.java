@@ -1,15 +1,18 @@
 package ru.clevertec.ecl.springboottaskclevertec.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @DynamicUpdate
 @Data
+@Table(name = "gift_certificate")
 public class GiftCertificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +27,12 @@ public class GiftCertificate {
     private Date createDate;
     @Column(nullable = false)
     private Date lastUpdateDate;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @JoinTable(
             name = "cert_tag",
             joinColumns = @JoinColumn(name = "gift_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private Set<Tag> tags;
+    @JsonManagedReference
+    private List<Tag> tags;
 }
