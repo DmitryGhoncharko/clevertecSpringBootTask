@@ -8,6 +8,8 @@ import ru.clevertec.ecl.springboottaskclevertec.model.Tag;
 import ru.clevertec.ecl.springboottaskclevertec.repository.GiftCertificateRepository;
 import ru.clevertec.ecl.springboottaskclevertec.repository.TagRepository;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -24,7 +26,14 @@ public class SimpleGiftCertificateService implements GiftCertificateService {
     @Transactional
     public GiftCertificate save(GiftCertificate giftCertificate) {
         Set<Tag> tagSet = giftCertificate.getTags();
-        tagSet.removeIf(tag -> tagRepository.findByName(tag.getName()).isPresent());
+        for(Tag tag : tagSet){
+            Optional<Tag> tagOptional = tagRepository.findByName(tag.getName());
+            if(tagOptional.isPresent()){
+                Tag tagFromOptional = tagOptional.get();
+                tagSet.remove(tag);
+                tagSet.add(tagFromOptional);
+            }
+        }
         return giftCertificateRepository.save(giftCertificate);
     }
 

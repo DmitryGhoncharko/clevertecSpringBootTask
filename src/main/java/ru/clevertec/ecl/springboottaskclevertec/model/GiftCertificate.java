@@ -1,10 +1,7 @@
 package ru.clevertec.ecl.springboottaskclevertec.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
@@ -13,9 +10,6 @@ import java.util.Set;
 @Entity
 @DynamicUpdate
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class GiftCertificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
