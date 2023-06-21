@@ -6,7 +6,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @SpringBootApplication
-@EnableWebMvc
 public class SpringbootTaskClevertecApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootTaskClevertecApplication.class, args);

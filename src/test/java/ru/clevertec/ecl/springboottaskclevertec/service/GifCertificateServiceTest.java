@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.springboottaskclevertec;
+package ru.clevertec.ecl.springboottaskclevertec.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,14 +9,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.clevertec.ecl.springboottaskclevertec.dto.GiftCertificateDto;
 import ru.clevertec.ecl.springboottaskclevertec.model.GiftCertificate;
 import ru.clevertec.ecl.springboottaskclevertec.repository.GiftCertificateRepository;
-import ru.clevertec.ecl.springboottaskclevertec.service.GiftCertificateService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-class GifCertificateTest {
+class GifCertificateServiceTest {
     @Autowired
     private GiftCertificateService giftCertificateService;
 
@@ -24,7 +23,7 @@ class GifCertificateTest {
     private GiftCertificateRepository giftCertificateRepository;
 
     @Test
-    void save(){
+    void save() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -33,10 +32,11 @@ class GifCertificateTest {
         GiftCertificateDto giftCertificateDto = GiftCertificateDto.builder().id(1L).duration(2).price(22.2).name("test").build();
         Mockito.when(giftCertificateRepository.save(giftCertificate)).thenReturn(giftCertificate);
         GiftCertificate result = giftCertificateService.save(giftCertificateDto);
-        Assertions.assertEquals(giftCertificate,result);
+        Assertions.assertEquals(giftCertificate, result);
     }
+
     @Test
-    void findByNameContains(){
+    void findByNameContains() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -46,10 +46,11 @@ class GifCertificateTest {
         giftCertificates.add(giftCertificate);
         Mockito.when(giftCertificateRepository.findByNameContains("test")).thenReturn(giftCertificates);
         List<GiftCertificate> result = giftCertificateService.findByNameContains("test");
-        Assertions.assertEquals(result,giftCertificates);
+        Assertions.assertEquals(result, giftCertificates);
     }
+
     @Test
-    void findByNameContainsOrderByNameAsc(){
+    void findByNameContainsOrderByNameAsc() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -59,10 +60,11 @@ class GifCertificateTest {
         giftCertificates.add(giftCertificate);
         Mockito.when(giftCertificateRepository.findByNameContainsOrderByNameAsc("test")).thenReturn(giftCertificates);
         List<GiftCertificate> result = giftCertificateService.findByNameContainsOrderByNameAsc("test");
-        Assertions.assertEquals(result,giftCertificates);
+        Assertions.assertEquals(result, giftCertificates);
     }
+
     @Test
-    void findByNameContainsOrderByNameDesc(){
+    void findByNameContainsOrderByNameDesc() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -72,10 +74,11 @@ class GifCertificateTest {
         giftCertificates.add(giftCertificate);
         Mockito.when(giftCertificateRepository.findByNameContainsOrderByNameDesc("test")).thenReturn(giftCertificates);
         List<GiftCertificate> result = giftCertificateService.findByNameContainsOrderByNameDesc("test");
-        Assertions.assertEquals(result,giftCertificates);
+        Assertions.assertEquals(result, giftCertificates);
     }
+
     @Test
-    void findByDescriptionContains(){
+    void findByDescriptionContains() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -85,10 +88,11 @@ class GifCertificateTest {
         giftCertificates.add(giftCertificate);
         Mockito.when(giftCertificateRepository.findByDescriptionContains("test")).thenReturn(giftCertificates);
         List<GiftCertificate> result = giftCertificateService.findByDescriptionContains("test");
-        Assertions.assertEquals(result,giftCertificates);
+        Assertions.assertEquals(result, giftCertificates);
     }
+
     @Test
-    void findByDescriptionContainsOrderByCreateDateAsc(){
+    void findByDescriptionContainsOrderByCreateDateAsc() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -98,10 +102,11 @@ class GifCertificateTest {
         giftCertificates.add(giftCertificate);
         Mockito.when(giftCertificateRepository.findByDescriptionContainsOrderByCreateDateAsc("test")).thenReturn(giftCertificates);
         List<GiftCertificate> result = giftCertificateService.findByDescriptionContainsOrderByCreateDateAsc("test");
-        Assertions.assertEquals(result,giftCertificates);
+        Assertions.assertEquals(result, giftCertificates);
     }
+
     @Test
-    void findByDescriptionContainsOrderByCreateDateDesc(){
+    void findByDescriptionContainsOrderByCreateDateDesc() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -111,10 +116,11 @@ class GifCertificateTest {
         giftCertificates.add(giftCertificate);
         Mockito.when(giftCertificateRepository.findByDescriptionContainsOrderByCreateDateDesc("test")).thenReturn(giftCertificates);
         List<GiftCertificate> result = giftCertificateService.findByDescriptionContainsOrderByCreateDateDesc("test");
-        Assertions.assertEquals(result,giftCertificates);
+        Assertions.assertEquals(result, giftCertificates);
     }
+
     @Test
-    void findByName(){
+    void findByName() {
         GiftCertificate giftCertificate = new GiftCertificate();
         giftCertificate.setId(1L);
         giftCertificate.setDuration(2);
@@ -122,6 +128,6 @@ class GifCertificateTest {
         giftCertificate.setName("test");
         Mockito.when(giftCertificateRepository.findByName("test")).thenReturn(Optional.of(giftCertificate));
         Optional<GiftCertificate> result = giftCertificateService.findByName("test");
-        Assertions.assertEquals(result,giftCertificate);
+        Assertions.assertEquals(result, giftCertificate);
     }
 }

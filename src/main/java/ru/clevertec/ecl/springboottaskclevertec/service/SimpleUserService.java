@@ -1,8 +1,9 @@
 package ru.clevertec.ecl.springboottaskclevertec.service;
 
 import com.sun.jdi.request.DuplicateRequestException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.ecl.springboottaskclevertec.dto.UserDto;
 import ru.clevertec.ecl.springboottaskclevertec.model.User;
 import ru.clevertec.ecl.springboottaskclevertec.repository.UserRepository;
@@ -10,16 +11,14 @@ import ru.clevertec.ecl.springboottaskclevertec.repository.UserRepository;
 import java.util.Optional;
 
 @Service
-public class SimpleUserService implements UserService{
+@RequiredArgsConstructor
+public class SimpleUserService implements UserService {
     private final UserRepository userRepository;
-    @Autowired
-    public SimpleUserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+
 
     @Override
     public UserDto save(UserDto userDto) {
-        if(userRepository.findByUserName(userDto.getUserName()).isPresent()){
+        if (userRepository.findByUserName(userDto.getUserName()).isPresent()) {
             throw new DuplicateRequestException();
         }
         User user = new User();
@@ -30,6 +29,7 @@ public class SimpleUserService implements UserService{
         return userDto;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<User> findByUserName(String name) {
         return userRepository.findByUserName(name);

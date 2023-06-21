@@ -1,7 +1,8 @@
 package ru.clevertec.ecl.springboottaskclevertec.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.ecl.springboottaskclevertec.dto.TagDto;
 import ru.clevertec.ecl.springboottaskclevertec.exception.DuplicateNameError;
 import ru.clevertec.ecl.springboottaskclevertec.model.Tag;
@@ -12,12 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SimpleTagService implements TagService{
+@RequiredArgsConstructor
+public class SimpleTagService implements TagService {
     private final TagRepository tagRepository;
-    @Autowired
-    public SimpleTagService(TagRepository tagRepository) {
-        this.tagRepository = tagRepository;
-    }
+
 
     @Override
     public Optional<TagDto> findByName(String name) {
@@ -34,17 +33,14 @@ public class SimpleTagService implements TagService{
     }
 
     @Override
-    public TagDto save(TagDto tagDto){
-        if(tagRepository.findByName(tagDto.getName()).isPresent()){
+    public TagDto save(TagDto tagDto) {
+        if (tagRepository.findByName(tagDto.getName()).isPresent()) {
             throw new DuplicateNameError();
         }
         Tag tag = new Tag();
         tag.setName(tagDto.getName());
         tag = tagRepository.save(tag);
-        return TagDto.builder().
-                id(tag.getId()).
-                name(tag.getName()).
-                build();
+        return TagDto.builder().id(tag.getId()).name(tag.getName()).build();
     }
 
     @Override
@@ -64,8 +60,9 @@ public class SimpleTagService implements TagService{
         return tagDto;
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public Tag findMostPopularTag() {
-        return tagRepository.findMostPopularTag();
+    public String findMostPopularTag() {
+        return tagRepository.findMostPopularTagName();
     }
 }

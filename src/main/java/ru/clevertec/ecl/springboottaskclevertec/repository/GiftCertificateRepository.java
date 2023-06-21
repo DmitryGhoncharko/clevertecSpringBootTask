@@ -5,7 +5,6 @@ import ru.clevertec.ecl.springboottaskclevertec.model.GiftCertificate;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface GiftCertificateRepository extends JpaRepository<GiftCertificate, Long> {
     List<GiftCertificate> findByNameContains(String name);

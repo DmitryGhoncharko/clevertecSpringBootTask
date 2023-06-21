@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.springboottaskclevertec;
+package ru.clevertec.ecl.springboottaskclevertec.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,6 @@ import ru.clevertec.ecl.springboottaskclevertec.dto.OrderDto;
 import ru.clevertec.ecl.springboottaskclevertec.model.Order;
 import ru.clevertec.ecl.springboottaskclevertec.model.User;
 import ru.clevertec.ecl.springboottaskclevertec.repository.OrderRepository;
-import ru.clevertec.ecl.springboottaskclevertec.service.OrderService;
 
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ class OrderServiceTest {
     private OrderRepository orderRepository;
 
     @Test
-    void save(){
+    void save() {
         User user = new User();
         user.setId(1L);
         user.setUserName("test");
@@ -38,10 +37,11 @@ class OrderServiceTest {
         order.setGiftCertificate(null);
         Mockito.when(orderRepository.save(order)).thenReturn(order);
         OrderDto result = orderService.save(orderDto);
-        Assertions.assertEquals(orderDto,result);
+        Assertions.assertEquals(orderDto, result);
     }
+
     @Test
-    void getById(){
+    void getById() {
         User user = new User();
         user.setId(1L);
         user.setUserName("test");
@@ -54,10 +54,11 @@ class OrderServiceTest {
         order.setGiftCertificate(null);
         Mockito.when(orderRepository.getById(1L)).thenReturn(order);
         Optional<Order> result = orderService.getById(1L);
-        Assertions.assertEquals(result,Optional.of(order));
+        Assertions.assertEquals(result, Optional.of(order));
     }
+
     @Test
-    void update(){
+    void update() {
         User user = new User();
         user.setId(1L);
         user.setUserName("test");
@@ -71,6 +72,6 @@ class OrderServiceTest {
         order.setGiftCertificate(null);
         Mockito.when(orderRepository.save(order)).thenReturn(order);
         Order result = orderService.update(order);
-        Assertions.assertEquals(order,result);
+        Assertions.assertEquals(order, result);
     }
 }

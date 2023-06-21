@@ -1,6 +1,6 @@
 package ru.clevertec.ecl.springboottaskclevertec.exception;
 
-public class CannotFoundByIdError extends Error{
+public class CannotFoundByIdError extends Error {
     public CannotFoundByIdError() {
     }
 

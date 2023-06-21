@@ -10,11 +10,12 @@ import ru.clevertec.ecl.springboottaskclevertec.exception.DuplicateNameError;
 @ControllerAdvice
 public class RestExceptionHandler {
     @ExceptionHandler(DuplicateNameError.class)
-    public ResponseEntity<String> duplicateNameError(DuplicateNameError ex){
-        return new ResponseEntity<>("Cannot save this name is present",HttpStatus.CONFLICT);
+    public ResponseEntity<String> duplicateNameError(DuplicateNameError ex) {
+        return new ResponseEntity<>("Cannot save this name is present", HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(CannotFoundByIdError.class)
-    public ResponseEntity<String> cannotFoundByIdError(DuplicateNameError ex){
-        return new ResponseEntity<>("Cannot found by id",HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> cannotFoundByIdError(DuplicateNameError ex) {
+        return new ResponseEntity<>("Cannot found by id", HttpStatus.NOT_FOUND);
     }
 }
