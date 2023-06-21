@@ -18,11 +18,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "gift_id",referencedColumnName = "id")
     private GiftCertificate giftCertificate;
-    @Column(nullable = false)
+    @Column
     private Date timeToBuy;
-
-    @Column(nullable = false)
-    private boolean payment;
     @Column(nullable = false)
     private double price;
 }

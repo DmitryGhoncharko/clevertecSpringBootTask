@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.clevertec.ecl.springboottaskclevertec.model.GiftCertificate;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface GiftCertificateRepository extends JpaRepository<GiftCertificate, Long> {
@@ -18,4 +19,8 @@ public interface GiftCertificateRepository extends JpaRepository<GiftCertificate
     List<GiftCertificate> findByDescriptionContainsOrderByCreateDateAsc(String name);
 
     List<GiftCertificate> findByDescriptionContainsOrderByCreateDateDesc(String name);
+
+    Optional<GiftCertificate> findByName(String name);
+
+    Optional<GiftCertificate> findAllById(Long id);
 }

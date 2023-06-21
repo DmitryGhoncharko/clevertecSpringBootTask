@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.clevertec.ecl.springboottaskclevertec.dto.GiftCertificateDto;
 import ru.clevertec.ecl.springboottaskclevertec.model.GiftCertificate;
 import ru.clevertec.ecl.springboottaskclevertec.service.GiftCertificateService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/gift")
@@ -21,8 +23,8 @@ public class GiftCertificateController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<String> saveGiftCertificate(@RequestBody GiftCertificate giftCertificate) {
-        giftCertificateService.save(giftCertificate);
+    public ResponseEntity<String> saveGiftCertificate(@RequestBody GiftCertificateDto giftCertificateDto) {
+        giftCertificateService.save(giftCertificateDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping(value = "/findByNameContains/{name}")
@@ -48,5 +50,19 @@ public class GiftCertificateController {
     @GetMapping(value = "/findByDescriptionContainsOrderByCreateDateDesc/{description}")
     public ResponseEntity<List<GiftCertificate>>findByDescriptionContainsOrderByCreateDateDesc(@PathVariable(value = "description") String description){
         return new ResponseEntity<>(giftCertificateService.findByDescriptionContainsOrderByCreateDateDesc(description),HttpStatus.OK);
+    }
+    @GetMapping(value = "/findByName/{name}")
+    public ResponseEntity<GiftCertificate> findByName(@PathVariable(value = "name") String name){
+        Optional<GiftCertificate> giftCertificateOptional = giftCertificateService.findByName(name);
+        return giftCertificateOptional.map(giftCertificate -> new ResponseEntity<>(giftCertificate, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    @PutMapping(value = "/update")
+    public ResponseEntity<GiftCertificate>update(@RequestBody GiftCertificateDto giftCertificateDto){
+        return new ResponseEntity<>(giftCertificateService.save(giftCertificateDto),HttpStatus.OK);
+    }
+    @DeleteMapping("/delete")
+    public ResponseEntity delete(@RequestBody GiftCertificate giftCertificate){
+        giftCertificateService.remove(giftCertificate);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
