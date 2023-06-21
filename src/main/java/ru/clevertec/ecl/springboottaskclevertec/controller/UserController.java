@@ -20,10 +20,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     *
+     * @param userDto save user
+     * @return
+     */
     @PostMapping(value = "/save")
     public ResponseEntity<UserDto> save(@RequestBody UserDto userDto){
         return new ResponseEntity<>(userService.save(userDto), HttpStatus.CREATED);
     }
+
+    /**
+     *
+     * @param name get user by name
+     * @return
+     */
     @GetMapping(value = "/get/{userName}")
     public ResponseEntity<User> getByUserName(@PathVariable(value = "userName") String name){
         Optional<User> userOptional = userService.findByUserName(name);

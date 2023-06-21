@@ -63,4 +63,9 @@ public class SimpleTagService implements TagService{
         tagRepository.save(tag);
         return tagDto;
     }
+
+    @Override
+    public Tag findMostPopularTag() {
+        return tagRepository.findMostPopularTag();
+    }
 }

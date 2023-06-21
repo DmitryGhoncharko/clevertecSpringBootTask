@@ -17,4 +17,6 @@ public interface TagService {
     void remove(TagDto tagDto);
 
     TagDto update(TagDto tagDto);
+
+    Tag findMostPopularTag();
 }
