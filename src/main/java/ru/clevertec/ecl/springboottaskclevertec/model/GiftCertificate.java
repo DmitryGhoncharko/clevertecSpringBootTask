@@ -17,7 +17,7 @@ public class GiftCertificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false)
     private String description;
@@ -27,6 +27,10 @@ public class GiftCertificate {
     private Date createDate;
     @Column(nullable = false)
     private Date lastUpdateDate;
+
+    @Column(nullable = false)
+    private Double price;
+
     @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @JoinTable(
             name = "cert_tag",

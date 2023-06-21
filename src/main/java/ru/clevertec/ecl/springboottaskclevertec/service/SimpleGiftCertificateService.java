@@ -36,7 +36,6 @@ public class SimpleGiftCertificateService implements GiftCertificateService {
     }
 
     @Override
-    @Transactional
     public List<GiftCertificate> findByNameContains(String name) {
         return giftCertificateRepository.findByNameContains(name);
     }
