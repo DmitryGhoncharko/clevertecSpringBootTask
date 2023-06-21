@@ -9,8 +9,9 @@ import ru.clevertec.ecl.springboottaskclevertec.repository.OrderRepository;
 import java.util.Optional;
 
 @Service
-public class SimpleOrderService implements OrderService{
+public class SimpleOrderService implements OrderService {
     private final OrderRepository orderRepository;
+
     @Autowired
     public SimpleOrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;

@@ -2,7 +2,6 @@ package ru.clevertec.ecl.springboottaskclevertec.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration;
 import org.springframework.stereotype.Service;
 import ru.clevertec.ecl.springboottaskclevertec.dto.GiftCertificateDto;
 import ru.clevertec.ecl.springboottaskclevertec.exception.CannotFoundByIdError;
@@ -14,12 +13,11 @@ import ru.clevertec.ecl.springboottaskclevertec.repository.TagRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class SimpleGiftCertificateService implements GiftCertificateService {
     private final GiftCertificateRepository giftCertificateRepository;
     private final TagRepository tagRepository;
-    @Autowired
-    private SqlInitializationAutoConfiguration sqlInitializationAutoConfiguration;
 
     @Autowired
     public SimpleGiftCertificateService(GiftCertificateRepository giftCertificateRepository, TagRepository tagRepository) {
@@ -28,11 +26,12 @@ public class SimpleGiftCertificateService implements GiftCertificateService {
     }
 
     @Override
+    @Transactional
     public GiftCertificate save(GiftCertificateDto giftCertificateDto) {
         List<Tag> tagSet = giftCertificateDto.getTags();
-        for(Tag tag : tagSet){
+        for (Tag tag : tagSet) {
             Optional<Tag> tagOptional = tagRepository.findByName(tag.getName());
-            if(tagOptional.isPresent()){
+            if (tagOptional.isPresent()) {
                 Tag tagFromOptional = tagOptional.get();
                 tagSet.remove(tag);
                 tagSet.add(tagFromOptional);
@@ -86,18 +85,19 @@ public class SimpleGiftCertificateService implements GiftCertificateService {
 
     @Override
     public void remove(GiftCertificate giftCertificate) {
-         giftCertificateRepository.delete(giftCertificate);
+        giftCertificateRepository.delete(giftCertificate);
     }
 
     @Override
+    @Transactional
     public GiftCertificate update(GiftCertificateDto giftCertificateDto) {
         Optional<GiftCertificate> giftCertificateOptional = giftCertificateRepository.findAllById(giftCertificateDto.getId());
-        if(giftCertificateOptional.isPresent()){
+        if (giftCertificateOptional.isPresent()) {
             GiftCertificate giftCertificate = new GiftCertificate();
             List<Tag> tagSet = giftCertificateDto.getTags();
-            for(Tag tag : tagSet){
+            for (Tag tag : tagSet) {
                 Optional<Tag> tagOptional = tagRepository.findByName(tag.getName());
-                if(tagOptional.isPresent()){
+                if (tagOptional.isPresent()) {
                     Tag tagFromOptional = tagOptional.get();
                     tagSet.remove(tag);
                     tagSet.add(tagFromOptional);

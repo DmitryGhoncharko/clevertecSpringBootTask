@@ -13,10 +13,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @ManyToOne
-    @JoinColumn(name = "gift_id",referencedColumnName = "id")
+    @JoinColumn(name = "gift_id", referencedColumnName = "id")
     private GiftCertificate giftCertificate;
     @Column
     private Date timeToBuy;

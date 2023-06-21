@@ -31,12 +31,8 @@ public class GiftCertificate {
     @Column(nullable = false)
     private Double price;
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "cert_tag",
-            joinColumns = @JoinColumn(name = "gift_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "cert_tag", joinColumns = @JoinColumn(name = "gift_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     @JsonManagedReference
     private List<Tag> tags;
 }

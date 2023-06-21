@@ -1,6 +1,6 @@
 package ru.clevertec.ecl.springboottaskclevertec.exception;
 
-public class DuplicateNameError extends Error{
+public class DuplicateNameError extends Error {
     public DuplicateNameError() {
     }
 

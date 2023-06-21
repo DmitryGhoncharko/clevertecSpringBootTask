@@ -10,8 +10,9 @@ import ru.clevertec.ecl.springboottaskclevertec.repository.UserRepository;
 import java.util.Optional;
 
 @Service
-public class SimpleUserService implements UserService{
+public class SimpleUserService implements UserService {
     private final UserRepository userRepository;
+
     @Autowired
     public SimpleUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -19,7 +20,7 @@ public class SimpleUserService implements UserService{
 
     @Override
     public UserDto save(UserDto userDto) {
-        if(userRepository.findByUserName(userDto.getUserName()).isPresent()){
+        if (userRepository.findByUserName(userDto.getUserName()).isPresent()) {
             throw new DuplicateRequestException();
         }
         User user = new User();

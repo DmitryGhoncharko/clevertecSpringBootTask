@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.ecl.springboottaskclevertec.dto.OrderDto;
 import ru.clevertec.ecl.springboottaskclevertec.model.Order;
-import ru.clevertec.ecl.springboottaskclevertec.repository.OrderRepository;
 import ru.clevertec.ecl.springboottaskclevertec.service.OrderService;
 
 import java.util.Optional;
@@ -15,40 +14,38 @@ import java.util.Optional;
 @RequestMapping(value = "/order")
 public class OrderController {
     private final OrderService orderService;
+
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
     /**
-     *
      * @param orderDto save order
      * @return
      */
     @PostMapping(value = "/save")
-    public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto){
+    public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
         return new ResponseEntity<>(orderService.save(orderDto), HttpStatus.CREATED);
     }
 
     /**
-     *
      * @param id get order by id
      * @return
      */
     @GetMapping(value = "/getById/{id}")
-    public ResponseEntity<Order> getById(@PathVariable(value = "id") Long id){
+    public ResponseEntity<Order> getById(@PathVariable(value = "id") Long id) {
         Optional<Order> orderOptional = orderService.getById(id);
         return orderOptional.map(order -> new ResponseEntity<>(order, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /**
-     *
      * @param order update order
      * @return
      */
     @PutMapping(value = "/update")
-    public ResponseEntity<Order> update(@RequestBody Order order){
-        return new ResponseEntity<>(orderService.update(order),HttpStatus.OK);
+    public ResponseEntity<Order> update(@RequestBody Order order) {
+        return new ResponseEntity<>(orderService.update(order), HttpStatus.OK);
     }
 
 }

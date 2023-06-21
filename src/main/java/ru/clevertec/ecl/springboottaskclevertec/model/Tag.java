@@ -7,7 +7,6 @@ import lombok.Data;
 import java.util.List;
 
 
-
 @Entity
 @Data
 @Table(name = "tag")
@@ -18,7 +17,7 @@ public class Tag {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "tags",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     @JsonBackReference
     private List<GiftCertificate> giftCertificates;
 }

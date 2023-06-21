@@ -1,4 +1,4 @@
-package ru.clevertec.ecl.springboottaskclevertec;
+package ru.clevertec.ecl.springboottaskclevertec.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.clevertec.ecl.springboottaskclevertec.dto.TagDto;
 import ru.clevertec.ecl.springboottaskclevertec.model.Tag;
 import ru.clevertec.ecl.springboottaskclevertec.repository.TagRepository;
-import ru.clevertec.ecl.springboottaskclevertec.service.TagService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,22 +17,23 @@ import java.util.Optional;
 @SpringBootTest
 class TagServiceTest {
     @Autowired
-    TagService tagService;
+    private TagService tagService;
     @MockBean
-    TagRepository tagRepository;
+    private TagRepository tagRepository;
 
     @Test
-    void findByName(){
+    void findByName() {
         Tag tag = new Tag();
         tag.setName("test");
         tag.setId(1L);
         TagDto tagDto = TagDto.builder().id(1L).name("test").build();
         Mockito.when(tagRepository.findByName("test")).thenReturn(Optional.of(tag));
         Optional<TagDto> result = tagService.findByName("test");
-        Assertions.assertEquals(result,Optional.of(tagDto));
+        Assertions.assertEquals(result, Optional.of(tagDto));
     }
+
     @Test
-    void findByNameContains(){
+    void findByNameContains() {
         Tag tag = new Tag();
         tag.setName("test");
         tag.setId(1L);
@@ -44,35 +44,35 @@ class TagServiceTest {
         tagDtos.add(tagDto);
         Mockito.when(tagRepository.findByNameContains("test")).thenReturn(tags);
         List<TagDto> result = tagService.findByNameContains("test");
-        Assertions.assertEquals(result,tagDtos);
+        Assertions.assertEquals(result, tagDtos);
     }
+
     @Test
-    void save(){
+    void save() {
         Tag tag = new Tag();
         tag.setName("test");
         tag.setId(1L);
         TagDto tagDto = TagDto.builder().id(1L).name("test").build();
         Mockito.when(tagRepository.save(tag)).thenReturn(tag);
         TagDto result = tagService.save(tagDto);
-        Assertions.assertEquals(result,tagDto);
+        Assertions.assertEquals(result, tagDto);
     }
+
     @Test
-    void update(){
+    void update() {
         Tag tag = new Tag();
         tag.setName("test");
         tag.setId(1L);
         TagDto tagDto = TagDto.builder().id(1L).name("test").build();
         Mockito.when(tagRepository.save(tag)).thenReturn(tag);
         TagDto result = tagService.update(tagDto);
-        Assertions.assertEquals(result,tagDto);
+        Assertions.assertEquals(result, tagDto);
     }
+
     @Test
-    void findMostPopularTag(){
-        Tag tag = new Tag();
-        tag.setName("test");
-        tag.setId(1L);
-        Mockito.when(tagRepository.findMostPopularTag()).thenReturn(tag);
-        Tag result = tagService.findMostPopularTag();
-        Assertions.assertEquals(result,tag);
+    void findMostPopularTag() {
+        Mockito.when(tagRepository.findMostPopularTagName()).thenReturn("tag");
+        String result = tagService.findMostPopularTag();
+        Assertions.assertEquals(result, "tag");
     }
 }
