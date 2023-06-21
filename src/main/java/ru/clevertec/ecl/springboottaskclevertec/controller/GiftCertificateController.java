@@ -60,7 +60,7 @@ public class GiftCertificateController {
     public ResponseEntity<GiftCertificate>update(@RequestBody GiftCertificateDto giftCertificateDto){
         return new ResponseEntity<>(giftCertificateService.save(giftCertificateDto),HttpStatus.OK);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping(value = "/delete")
     public ResponseEntity delete(@RequestBody GiftCertificate giftCertificate){
         giftCertificateService.remove(giftCertificate);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

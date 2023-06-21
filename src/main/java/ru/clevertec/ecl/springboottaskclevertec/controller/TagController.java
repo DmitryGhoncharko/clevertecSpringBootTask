@@ -32,12 +32,12 @@ public class TagController {
     public ResponseEntity<TagDto> save(@RequestBody TagDto tagDto) {
         return new ResponseEntity<>(tagService.save(tagDto), HttpStatus.CREATED);
     }
-    @DeleteMapping("/remove")
+    @DeleteMapping(value = "/remove")
     public ResponseEntity remove(@RequestBody TagDto tagDto){
         tagService.remove(tagDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PutMapping("/update")
+    @PutMapping(value = "/update")
     public ResponseEntity<TagDto> update(@RequestBody TagDto tagDto){
         tagService.update(tagDto);
         return new ResponseEntity<>(tagDto,HttpStatus.OK);
