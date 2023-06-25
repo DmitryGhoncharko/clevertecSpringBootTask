@@ -1,1 +1,0 @@
-insert into gift_certificate(create_date,description,duration,last_update_date,name,price) values (CURRENT_DATE(),'test',2,CURRENT_DATE(),'test',22.2);

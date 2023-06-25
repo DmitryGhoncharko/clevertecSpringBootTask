@@ -1,1 +1,0 @@
-insert into tag(name) values ('test');

@@ -1,1 +1,0 @@
-insert into user_t(balance,user_name) values (22.2,'test');
